@@ -3,7 +3,7 @@
 
 #define SUCCESS 1
 #define FAILURE 0
-#define EPS 1e-7
+#define EPS 1e-7  // e-7 ???
 
 typedef struct matrix_struct {
     double** matrix;
@@ -26,6 +26,6 @@ int _fill_matrix(matrix_t* A);
 void _return_matrix(matrix_t* matrix);
 int _check_calloc_1(int *flag, double** matrix);
 int _check_calloc_2(int *flag, double* matrix);
-int same_size(matrix_t* A, matrix_t* B);
+int _same_size(matrix_t* A, matrix_t* B);
 
 #endif  // SRC_MATRIX_H_

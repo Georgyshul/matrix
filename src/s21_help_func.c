@@ -51,3 +51,7 @@ int _check_calloc_2(int *flag, double* matrix) {
     }
     return check;
 }
+
+int _same_size(matrix_t* A, matrix_t* B) {
+    return (A->rows == B->rows && A->columns == B->columns) ? 0 : 2;
+}

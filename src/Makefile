@@ -23,6 +23,20 @@ test_eq.o: matrix.h test_eq.c
 	$(CC) $(CFLAGS) -c test_eq.c
 
 
+test_sum: s21_create_matrix.o s21_remove_matrix.o s21_help_func.o s21_sum_matrix.o test_sum.o 
+	$(CC) $(CFLAGS) s21_create_matrix.o s21_remove_matrix.o s21_help_func.o s21_sum_matrix.o test_sum.o -o test_sum
+
+test_sum.o: matrix.h test_sum.c
+	$(CC) $(CFLAGS) -c test_sum.c
+
+
+test_sub: s21_create_matrix.o s21_remove_matrix.o s21_help_func.o s21_sum_matrix.o s21_mult_number.o s21_sub_matrix.o test_sub.o 
+	$(CC) $(CFLAGS) s21_create_matrix.o s21_remove_matrix.o s21_help_func.o s21_sum_matrix.o s21_mult_number.o s21_sub_matrix.o test_sub.o -o test_sub
+
+test_sub.o: matrix.h test_sub.c
+	$(CC) $(CFLAGS) -c test_sub.c
+
+
 
 s21_create_matrix.o: matrix.h s21_create_matrix.c
 	$(CC) $(CFLAGS) -c s21_create_matrix.c
@@ -36,18 +50,14 @@ s21_eq_matrix.o: matrix.h s21_eq_matrix.c
 s21_help_func.o: matrix.h s21_help_func.c
 	$(CC) $(CFLAGS) -c s21_help_func.c
 
+s21_mult_number.o: matrix.h s21_mult_number.c
+	$(CC) $(CFLAGS) -c s21_mult_number.c
 
+s21_sum_matrix.o: matrix.h s21_sum_matrix.o
+	$(CC) $(CFLAGS) -c s21_sum_matrix.c
 
-
-test_basic: s21_create_matrix.o basic_func.o test_basic.o
-	$(CC) $(CFLAGS) s21_create_matrix.o basic_func.o test_basic.o -o test_basic
-
-basic_func.o: matrix.h basic/basic_func.h basic/basic_func.c
-	$(CC) $(CFLAGS) -c basic/basic_func.c
-
-test_basic.o: matrix.h creation/creation.h basic/basic_func.h basic/test_basic.c
-	$(CC) -c basic/test_basic.c
-
+s21_sub_matrix.o: matrix.h s21_sub_matrix.c
+	$(CC) $(CFLAGS) -c s21_sub_matrix.c
 
 
 # test: s21_math.o
