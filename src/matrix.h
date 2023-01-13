@@ -21,11 +21,17 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 int s21_mult_number(matrix_t *A, double number, matrix_t *result);
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 
+int s21_transpose(matrix_t *A, matrix_t *result);
+
+int s21_determinant(matrix_t *A, double *result);
+
 
 int _fill_matrix(matrix_t* A);
 void _return_matrix(matrix_t* matrix);
 int _check_calloc_1(int *flag, double** matrix);
 int _check_calloc_2(int *flag, double* matrix);
 int _same_size(matrix_t* A, matrix_t* B);
+double _det(matrix_t* A);
+void _copy_matrix(matrix_t *new, matrix_t* old, int size, int column);
 
 #endif  // SRC_MATRIX_H_
