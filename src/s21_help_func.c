@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "matrix.h"
+#include "s21_matrix.h"
 
 int _fill_matrix(matrix_t* A) {
     int flag = 0;
@@ -56,23 +56,23 @@ int _same_size(matrix_t* A, matrix_t* B) {
     return (A->rows == B->rows && A->columns == B->columns) ? 0 : 2;
 }
 
-double _det(matrix_t* A) {
-    double d = 0;
-    if (A->rows == 1) {
-        return A->matrix[0][0];
-    } else if (A->rows > 1) {
-        int sign = 1;
-        for (int i = 0; i < A->columns; i++) {
-            matrix_t* tmp;
-            s21_create_matrix(A->rows - 1, A->rows - 1, tmp);
-            _copy_matrix(tmp, A, A->rows - 1, i);
-            d += sign * A->matrix[0][i] * _det(tmp);
-            sign *= -1;
-            s21_remove_matrix(tmp);
-        }
-    }
-    return d;
-}
+// double _det(matrix_t* A) {
+//     double d = 0;
+//     if (A->rows == 1) {
+//         return A->matrix[0][0];
+//     } else if (A->rows > 1) {
+//         int sign = 1;
+//         for (int i = 0; i < A->columns; i++) {
+//             matrix_t* tmp;
+//             s21_create_matrix(A->rows - 1, A->rows - 1, tmp);
+//             _copy_matrix(tmp, A, A->rows - 1, i);
+//             d += sign * A->matrix[0][i] * _det(tmp);
+//             sign *= -1;
+//             s21_remove_matrix(tmp);
+//         }
+//     }
+//     return d;
+// }
 
 void _copy_matrix(matrix_t *new, matrix_t* old, int size, int column) {
     for (int i = 0; i < size; i++) {

@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "s21_matrix.h"
 #include <stdlib.h>
 
 void s21_remove_matrix(matrix_t *A) {
