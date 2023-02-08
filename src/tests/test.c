@@ -672,6 +672,293 @@ START_TEST(mult_number_2) {
 }
 END_TEST
 
+
+START_TEST(mult_matrix_1) {
+  int rows_1 = 3;
+  int columns_1 = 1;
+
+  int rows_2 = 1;
+  int columns_2 = 3;
+
+  matrix_t matrix_1;
+  matrix_t matrix_2;
+
+  s21_create_matrix(rows_1, columns_1, &matrix_1);
+  s21_create_matrix(rows_2, columns_2, &matrix_2);
+
+  double number_1 = 1;
+  double number_2 = 4;
+
+  for (int i = 0; i < matrix_1.rows; i++) {
+    for (int j = 0; j < matrix_1.columns; j++) {
+      matrix_1.matrix[i][j] = number_1;
+      number_1++;
+    }
+  }
+
+  for (int i = 0; i < matrix_2.rows; i++) {
+    for (int j = 0; j < matrix_2.columns; j++) {
+      matrix_2.matrix[i][j] = number_2;
+      number_2++;
+    }
+  }
+
+  matrix_t result;
+
+  int flag = s21_mult_matrix(&matrix_1, &matrix_2, &result);
+
+  int rows = 3;
+  int columns = 3;
+
+  matrix_t true_result;
+  s21_create_matrix(rows, columns, &true_result);
+
+  int multiplicant = 1;
+
+  for (int i = 0; i < true_result.rows; i++) {
+    int number = 4;
+    for (int j = 0; j < true_result.columns; j++) {
+      true_result.matrix[i][j] = number * multiplicant;
+      number++;
+    }
+    multiplicant++;
+  }
+
+  // _return_matrix(&result);
+  // printf("\n");
+  // _return_matrix(&true_result);
+
+  if (!flag) {
+    flag = s21_eq_matrix(&result, &true_result);
+  }
+
+  ck_assert_int_eq(1, flag);
+}
+END_TEST
+
+START_TEST(mult_matrix_2) {
+  int rows_1 = 3;
+  int columns_1 = 2;
+
+  int rows_2 = 2;
+  int columns_2 = 3;
+
+  matrix_t matrix_1;
+  matrix_t matrix_2;
+
+  s21_create_matrix(rows_1, columns_1, &matrix_1);
+  s21_create_matrix(rows_2, columns_2, &matrix_2);
+
+  double number_1 = 1;
+  double number_2 = 1;
+
+  for (int i = 0; i < matrix_1.rows; i++) {
+    for (int j = 0; j < matrix_1.columns; j++) {
+      matrix_1.matrix[i][j] = number_1;
+      number_1++;
+    }
+  }
+
+  for (int i = 0; i < matrix_2.rows; i++) {
+    for (int j = 0; j < matrix_2.columns; j++) {
+      matrix_2.matrix[i][j] = number_2;
+    }
+  }
+
+  matrix_t result;
+
+  int flag = s21_mult_matrix(&matrix_1, &matrix_2, &result);
+
+  int rows = 3;
+  int columns = 3;
+
+  matrix_t true_result;
+  s21_create_matrix(rows, columns, &true_result);
+
+  int number = 1;
+
+  for (int i = 0; i < true_result.rows; i++) {
+    for (int j = 0; j < true_result.columns; j++) {
+      true_result.matrix[i][j] = number * 2 + 1;
+    }
+    number += 2;
+  }
+
+  // _return_matrix(&result);
+  // printf("\n");
+  // _return_matrix(&true_result);
+
+  if (!flag) {
+    flag = s21_eq_matrix(&result, &true_result);
+  }
+
+  ck_assert_int_eq(1, flag);
+}
+END_TEST
+
+START_TEST(mult_matrix_3) {
+  int rows_1 = 3;
+  int columns_1 = 1;
+
+  int rows_2 = 2;
+  int columns_2 = 3;
+
+  matrix_t matrix_1;
+  matrix_t matrix_2;
+
+  s21_create_matrix(rows_1, columns_1, &matrix_1);
+  s21_create_matrix(rows_2, columns_2, &matrix_2);
+
+  double number_1 = 1;
+  double number_2 = 4;
+
+  for (int i = 0; i < matrix_1.rows; i++) {
+    for (int j = 0; j < matrix_1.columns; j++) {
+      matrix_1.matrix[i][j] = number_1;
+      number_1++;
+    }
+  }
+
+  for (int i = 0; i < matrix_2.rows; i++) {
+    for (int j = 0; j < matrix_2.columns; j++) {
+      matrix_2.matrix[i][j] = number_2;
+      number_2++;
+    }
+  }
+
+  matrix_t result;
+
+  int flag = s21_mult_matrix(&matrix_1, &matrix_2, &result);
+
+  ck_assert_int_eq(2, flag);
+}
+END_TEST
+
+START_TEST(mult_matrix_4) {
+  int rows_1 = 3;
+  int columns_1 = 1;
+
+  int rows_2 = 2;
+  int columns_2 = 0;
+
+  matrix_t matrix_1;
+  matrix_t matrix_2;
+
+  s21_create_matrix(rows_1, columns_1, &matrix_1);
+  s21_create_matrix(rows_2, columns_2, &matrix_2);
+
+  double number_1 = 1;
+  double number_2 = 4;
+
+  for (int i = 0; i < matrix_1.rows; i++) {
+    for (int j = 0; j < matrix_1.columns; j++) {
+      matrix_1.matrix[i][j] = number_1;
+      number_1++;
+    }
+  }
+
+  for (int i = 0; i < matrix_2.rows; i++) {
+    for (int j = 0; j < matrix_2.columns; j++) {
+      matrix_2.matrix[i][j] = number_2;
+      number_2++;
+    }
+  }
+
+  matrix_t result;
+
+  int flag = s21_mult_matrix(&matrix_1, &matrix_2, &result);
+
+  ck_assert_int_eq(2, flag);
+}
+END_TEST
+
+START_TEST(mult_matrix_5) {
+  int rows_1 = 3;
+  int columns_1 = 0;
+
+  int rows_2 = 2;
+  int columns_2 = 0;
+
+  matrix_t matrix_1;
+  matrix_t matrix_2;
+
+  s21_create_matrix(rows_1, columns_1, &matrix_1);
+  s21_create_matrix(rows_2, columns_2, &matrix_2);
+
+  double number_1 = 1;
+  double number_2 = 4;
+
+  for (int i = 0; i < matrix_1.rows; i++) {
+    for (int j = 0; j < matrix_1.columns; j++) {
+      matrix_1.matrix[i][j] = number_1;
+      number_1++;
+    }
+  }
+
+  for (int i = 0; i < matrix_2.rows; i++) {
+    for (int j = 0; j < matrix_2.columns; j++) {
+      matrix_2.matrix[i][j] = number_2;
+      number_2++;
+    }
+  }
+
+  matrix_t result;
+
+  int flag = s21_mult_matrix(&matrix_1, &matrix_2, &result);
+
+  ck_assert_int_eq(1, flag);
+}
+END_TEST
+
+
+START_TEST(transpose_1) {
+  int rows_1 = 3;
+  int columns_1 = 3;
+
+  matrix_t matrix_1;
+
+  s21_create_matrix(rows_1, columns_1, &matrix_1);
+
+  double number_1 = 1;
+
+  for (int i = 0; i < matrix_1.rows; i++) {
+    for (int j = 0; j < matrix_1.columns; j++) {
+      matrix_1.matrix[i][j] = number_1;
+      number_1++;
+    }
+  }
+
+  matrix_t result;
+
+  int flag = s21_transpose(&matrix_1, &result);
+
+  int rows = 3;
+  int columns = 3;
+
+  matrix_t true_result;
+  s21_create_matrix(rows, columns, &true_result);
+
+  int number = 1;
+
+  for (int i = 0; i < true_result.columns; i++) {
+    for (int j = 0; j < true_result.rows; j++) {
+      true_result.matrix[j][i] = number;
+      number++;
+    }
+  }
+
+  // _return_matrix(&result);
+  // printf("\n");
+  // _return_matrix(&true_result);
+
+  if (!flag) {
+    flag = s21_eq_matrix(&result, &true_result);
+  }
+
+  ck_assert_int_eq(1, flag);
+}
+END_TEST
+
 int main(void) {
   Suite *s1 = suite_create("Core");
   SRunner *sr = srunner_create(s1);
@@ -714,6 +1001,18 @@ int main(void) {
   suite_add_tcase(s1, s21_mult_number);
   tcase_add_test(s21_mult_number, mult_number_1);
   tcase_add_test(s21_mult_number, mult_number_2);
+
+  TCase *s21_mult_matrix = tcase_create("mult_matrix");
+  suite_add_tcase(s1, s21_mult_matrix);
+  tcase_add_test(s21_mult_matrix, mult_matrix_1);
+  tcase_add_test(s21_mult_matrix, mult_matrix_2);
+  tcase_add_test(s21_mult_matrix, mult_matrix_3);
+  tcase_add_test(s21_mult_matrix, mult_matrix_4);
+  tcase_add_test(s21_mult_matrix, mult_matrix_5);
+
+  TCase *s21_transpose = tcase_create("transpose");
+  suite_add_tcase(s1, s21_transpose);
+  tcase_add_test(s21_transpose, transpose_1);
 
   srunner_run_all(sr, CK_ENV);
   nf = srunner_ntests_failed(sr);
