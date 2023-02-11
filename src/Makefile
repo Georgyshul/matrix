@@ -9,11 +9,10 @@ BUILD_TEST_DIR = obj_tests
 
 OBJS := $(SRC:%.c=${BUILD_DIR}/%.o)
 
-CFLAGS=-Wall -Wextra -Werror -g
+CFLAGS=-Wall -Wextra -Werror -g -lm
 LDFLAGS=$(shell pkg-config --cflags --libs check)
 INC_CHECK ?= $(shell pkg-config --cflags check)
 GCOVFLAGS=-fprofile-arcs -ftest-coverage
-
 
 
 all: s21_matrix.a test
@@ -38,11 +37,19 @@ test: s21_matrix.a ${BUILD_TEST_DIR}/test.o
 	./test.out
 
 
+gcov_report:
+	$(CC) $(CFLAGS) $(GCOVFLAGS) $(SRC) $(TEST_DIR)/test.c $(LDFLAGS) -o gcov_main
+	./gcov_main
+	lcov --capture --directory . --output-file coverage.info
+	genhtml coverage.info --output-directory gcov_report
+	/usr/bin/firefox gcov_report/index.html
+	rm -Rf *.gcda *.cov *.gcno *.info
+
+codestyle:
+	clang-format -i $(SRC)
+
 
 clean:
-	rm -r ${BUILD_DIR}
-	rm -f s21_matrix.a
-	rm -r ${BUILD_TEST_DIR}
-	rm test.out
+	rm -rf *.o *.html *.gcda *.gcno *.css *.a *.gcov *.info *.out *.cfg *.txt gcov_report gcov_main *.dSYM
 
 rebuild: clean all

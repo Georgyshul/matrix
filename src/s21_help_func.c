@@ -3,18 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void _return_matrix(matrix_t *matrix) {
-  for (int i = 0; i < matrix->rows; i++) {
-    for (int j = 0; j < matrix->columns; j++) {
-      printf("%lf", matrix->matrix[i][j]);
-      if (j < matrix->columns - 1) {
-        printf(" ");
-      }
-    }
-    printf("\n");
-  }
-}
-
 int _same_size(matrix_t *A, matrix_t *B) {
   return (A->rows == B->rows && A->columns == B->columns) ? 0 : 2;
 }

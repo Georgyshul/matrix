@@ -28,7 +28,6 @@ int s21_determinant(matrix_t *A, double *result);        // tested
 
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);  // tested
 
-void _return_matrix(matrix_t *matrix);
 int _same_size(matrix_t *A, matrix_t *B);
 double _calc_minor(matrix_t *A, int row, int column);
 

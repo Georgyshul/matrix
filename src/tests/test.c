@@ -610,7 +610,7 @@ START_TEST(mult_number_1) {
   }
   double number = 2.5;
 
-  int mult_flag = s21_mult_number(&matrix, number, &result);
+  s21_mult_number(&matrix, number, &result);
 
   matrix_t true_result;
   s21_create_matrix(rows, columns, &true_result);
